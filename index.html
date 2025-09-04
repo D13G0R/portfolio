@@ -35,6 +35,7 @@
             display: grid;
             grid-template-columns: 1fr;
             gap: 2rem;
+            align-items: start;
         }
         
         @media (min-width: 768px) {
@@ -215,15 +216,13 @@
                 <section class="profile-section">
                     <h2 class="section-title">Acerca de mí</h2>
                     <p style="color: #6b6356; font-size: 1rem; margin-bottom: 1.5rem;">
-                        Soy un desarrollador en formación con una fuerte pasión por crear soluciones backend eficientes. 
-                        Mi enfoque principal está en Python y su ecosistema, donde he desarrollado proyectos que han 
-                        obtenido reconocimientos a nivel municipal y departamental. Me caracterizo por mi capacidad de 
-                        aprendizaje rápido y mi disposición constante para colaborar y ayudar a otros.
-                    </p>
-                    <p style="color: #6b6356; font-size: 1rem;">
-                        Busco una oportunidad de práctica donde pueda aplicar mis conocimientos técnicos, continuar 
-                        aprendiendo en un entorno profesional y contribuir al éxito del equipo con mi actitud positiva 
-                        y colaborativa.
+                        Desarrollador Backend en formación con foco en Python y experiencia práctica en Django, capaz de
+                    colaborar en proyectos que requieren estructuras claras y soluciones escalables. Con fundamentos en
+                    Flask y FastAPI para APIs, estoy en proceso de ampliar conocimientos y aplicar buenas prácticas de
+                    diseño, pruebas y control de versiones (Git Flow). He contribuido a proyectos de salud mental y
+                    emocional a nivel municipal/departamental, ocupándome del diseño de base de datos, APIs REST y
+                    autenticación, y mantengo una actitud proactiva de aprendizaje continuo, resolución de problemas y
+                    comunicación técnica efectiva para apoyar equipos ágiles.
                     </p>
                 </section>
 
@@ -271,51 +270,7 @@
                         </div>
                     </div>
                 </section>
-
-                <!-- Git Workflow Section -->
-                <section class="workflow-container">
-                    <h2 style="color: #4a453e; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">
-                        Metodología de Control de Versiones
-                    </h2>
-                    <p style="color: #6b6356; margin-bottom: 0;">
-                        Implemento Git Flow para mantener un desarrollo organizado y colaborativo
-                    </p>
-                    <div class="workflow-steps">
-                        <div class="workflow-step">Main<br><small>Producción</small></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-step">Develop<br><small>Integración</small></div>
-                        <div class="workflow-arrow">→</div>
-                        <div class="workflow-step">Features<br><small>Desarrollo</small></div>
-                    </div>
-                </section>
                 
-            </div>
-
-            <!-- Right Column -->
-            <div>
-                
-                <!-- Skills Radar -->
-                <section class="profile-section">
-                    <h2 class="section-title">Competencias Técnicas</h2>
-                    <p style="color: #6b6356; font-size: 0.9rem; margin-bottom: 1rem;">
-                        Evaluación realista de mis habilidades actuales como desarrollador junior
-                    </p>
-                    <div class="chart-container">
-                        <canvas id="skillsRadarChart"></canvas>
-                    </div>
-                </section>
-
-                <!-- Technologies Bar Chart -->
-                <section class="profile-section">
-                    <h2 class="section-title">Tecnologías</h2>
-                    <p style="color: #6b6356; font-size: 0.9rem; margin-bottom: 1rem;">
-                        Nivel de experiencia en diferentes herramientas y lenguajes
-                    </p>
-                    <div class="chart-container">
-                        <canvas id="technologiesBarChart"></canvas>
-                    </div>
-                </section>
-
                 <!-- Soft Skills -->
                 <section class="profile-section">
                     <h2 class="section-title">Competencias Personales</h2>
@@ -348,6 +303,50 @@
                         </p>
                     </div>
                 </section>
+                
+                <!-- Git Workflow Section -->
+                <section class="workflow-container" style="margin-bottom: 2rem;">
+                    <h2 style="color: #4a453e; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">
+                        Metodología de Control de Versiones
+                    </h2>
+                    <p style="color: #6b6356; margin-bottom: 0;">
+                        Implemento Git Flow para mantener un desarrollo organizado y colaborativo
+                    </p>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">Main<br><small>Producción</small></div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">Develop<br><small>Integración</small></div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">Features<br><small>Desarrollo</small></div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- Right Column -->
+            <div>
+                
+                <!-- Skills Radar -->
+                <section class="profile-section">
+                    <h2 class="section-title">Competencias Técnicas</h2>
+                    <p style="color: #6b6356; font-size: 0.9rem; margin-bottom: 1rem;">
+                        Evaluación realista de mis habilidades actuales como desarrollador junior
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="skillsRadarChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- Technologies Bar Chart -->
+                <section class="profile-section">
+                    <h2 class="section-title">Tecnologías</h2>
+                    <p style="color: #6b6356; font-size: 0.9rem; margin-bottom: 1rem;">
+                        Nivel de experiencia en diferentes herramientas y lenguajes
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="technologiesBarChart"></canvas>
+                    </div>
+                </section>
 
                 <!-- Education -->
                 <section class="profile-section">
@@ -374,7 +373,7 @@
                         </span>
                     </div>
                 </section>
-                
+
             </div>
         </div>
 
@@ -454,7 +453,7 @@
             data: {
                 labels: ['Python', 'PHP', 'MySQL', 'Git', 'Docker', 'HTML/CSS', 'JavaScript'],
                 datasets: [{
-                    data: [80, 50, 65, 75, 45, 70, 60],
+                    data: [70, 40, 45, 75, 65, 60, 50],
                     backgroundColor: [
                         naturalColors.primary,
                         naturalColors.secondary,
