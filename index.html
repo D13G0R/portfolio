@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,450 +8,498 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: #f7f6f3;
+            line-height: 1.7;
         }
-
+        
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        
+        .profile-section {
+            background: #ffffff;
+            border: 1px solid #e8e6e1;
+            border-radius: 8px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        @media (min-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .content-grid {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+        
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 320px;
-            max-height: 400px;
+            height: 300px;
+            margin: 1rem 0;
         }
-
-        @media (min-width: 768px) {
-            .chart-container {
-                height: 400px;
-            }
+        
+        .skill-item {
+            background: #fafaf9;
+            border-left: 3px solid #8b7355;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border-radius: 0 6px 6px 0;
         }
-
-        .flow-step {
+        
+        .project-card {
+            background: #ffffff;
+            border: 1px solid #e8e6e1;
+            border-radius: 8px;
+            padding: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .tech-tag {
+            background: #e8e6e1;
+            color: #5d5347;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin: 0.2rem;
+            display: inline-block;
+        }
+        
+        .section-title {
+            color: #4a453e;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #d6d3ce;
+        }
+        
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 12px;
+            border: 4px solid #d6d3ce;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            object-fit: cover;
+        }
+        
+        .header-content {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .header-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .workflow-container {
+            background: #fdfcfb;
+            border: 1px solid #e8e6e1;
+            border-radius: 8px;
+            padding: 2rem;
             text-align: center;
-            padding: 0.75rem 1rem;
-            border-radius: 0.75rem;
+        }
+        
+        .workflow-steps {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        
+        .workflow-step {
+            background: #f4f3f1;
+            border: 2px solid #d6d3ce;
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
             font-weight: 600;
-            min-height: 60px;
-            transition: all 0.3s ease;
+            color: #5d5347;
+            min-width: 140px;
         }
-
-        .flow-step:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.15);
-        }
-
-        .flow-arrow {
-            font-size: 2rem;
+        
+        .workflow-arrow {
+            color: #8b7355;
+            font-size: 1.5rem;
             font-weight: bold;
-            color: #3498db;
         }
-
-        .competencia-item {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            border-left: 4px solid #3498db;
-            border-radius: 0.5rem;
-            padding: 1rem;
-            margin-bottom: 0.75rem;
-            box-shadow: 0 2px 10px rgba(52, 152, 219, 0.08);
-            transition: all 0.3s ease;
+        
+        .education-item {
+            background: #fafaf9;
+            border: 1px solid #e8e6e1;
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
         }
-
-        .competencia-item:hover {
-            transform: translateX(4px);
-            box-shadow: 0 4px 20px rgba(52, 152, 219, 0.15);
+        
+        .progress-bar {
+            background: #e8e6e1;
+            height: 6px;
+            border-radius: 3px;
+            margin: 0.5rem 0;
         }
-
-        .skill-badge {
-            background: linear-gradient(135deg, #e8f4f8 0%, #d4edda 100%);
-            color: #2c5530;
-            border: 1px solid #27ae60;
+        
+        .progress-fill {
+            background: #8b7355;
+            height: 100%;
+            border-radius: 3px;
+            width: 75%;
         }
-
-        .section-card {
-            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border: 1px solid #e2e8f0;
-        }
-
-        .section-card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-        }
-
-        .header-gradient {
-            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        
+        @media (max-width: 767px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .workflow-steps {
+                flex-direction: column;
+            }
+            
+            .workflow-arrow {
+                transform: rotate(90deg);
+            }
         }
     </style>
 </head>
-
-<body class="text-slate-700">
-
-    <div class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
-
-        <header class="text-center mb-12 p-8 bg-white rounded-2xl shadow-lg border border-slate-200">
-            <h1 class="text-4xl md:text-5xl font-extrabold header-gradient mb-2">Diego Alejandro Rodriguez Espinoza</h1>
-            <p class="mt-2 text-xl md:text-2xl font-semibold text-slate-600">Desarrollador de Software con Énfasis en
-                Backend</p>
-            <div class="mt-4 w-24 h-1 bg-gradient-to-r from-teal-400 to-blue-400 mx-auto rounded-full"></div>
+<body>
+    <div class="main-container">
+        
+        <!-- Header Section -->
+        <header class="profile-section">
+            <div class="header-content">
+                <img src="src/images/image.png" alt="Diego Alejandro Rodriguez" class="profile-image">
+                <div class="header-text">
+                    <h1 style="color: #4a453e; font-size: 2.25rem; font-weight: 700; margin-bottom: 0.5rem;">
+                        Diego Alejandro Rodriguez Espinoza
+                    </h1>
+                    <p style="color: #6b6356; font-size: 1.2rem; font-weight: 600;">
+                        Desarrollador de Software con Énfasis en Backend
+                    </p>
+                    <p style="color: #8b7355; margin-top: 1rem; font-size: 1rem;">
+                        Estudiante SENA • Análisis y Desarrollo de Software • En formación para práctica profesional
+                    </p>
+                </div>
+            </div>
         </header>
 
-        <main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Main Content Grid -->
+        <div class="content-grid">
+            
+            <!-- Left Column -->
+            <div>
+                
+                <!-- About Section -->
+                <section class="profile-section">
+                    <h2 class="section-title">Acerca de mí</h2>
+                    <p style="color: #6b6356; font-size: 1rem; margin-bottom: 1.5rem;">
+                        Soy un desarrollador en formación con una fuerte pasión por crear soluciones backend eficientes. 
+                        Mi enfoque principal está en Python y su ecosistema, donde he desarrollado proyectos que han 
+                        obtenido reconocimientos a nivel municipal y departamental. Me caracterizo por mi capacidad de 
+                        aprendizaje rápido y mi disposición constante para colaborar y ayudar a otros.
+                    </p>
+                    <p style="color: #6b6356; font-size: 1rem;">
+                        Busco una oportunidad de práctica donde pueda aplicar mis conocimientos técnicos, continuar 
+                        aprendiendo en un entorno profesional y contribuir al éxito del equipo con mi actitud positiva 
+                        y colaborativa.
+                    </p>
+                </section>
 
-            <section class="lg:col-span-3 section-card rounded-xl p-8 transition-all duration-300">
-                <h2 class="text-2xl font-bold text-slate-700 mb-6 flex items-center">
-                    <span class="w-2 h-8 bg-gradient-to-b from-teal-400 to-blue-400 rounded-full mr-3"></span>
-                    Perfil Profesional
-                </h2>
-                <p class="text-slate-600 leading-relaxed text-lg">
-                    Desarrollador Backend en formación con foco en Python y experiencia práctica en Django, capaz de
-                    colaborar en proyectos que requieren estructuras claras y soluciones escalables. Con fundamentos en
-                    Flask y FastAPI para APIs, estoy en proceso de ampliar conocimientos y aplicar buenas prácticas de
-                    diseño, pruebas y control de versiones (Git Flow). He contribuido a proyectos de salud mental y
-                    emocional a nivel municipal/departamental, ocupándome del diseño de base de datos, APIs REST y
-                    autenticación, y mantengo una actitud proactiva de aprendizaje continuo, resolución de problemas y
-                    comunicación técnica efectiva para apoyar equipos ágiles.
-                </p>
-            </section>
-
-            <section class="lg:col-span-1 section-card rounded-xl p-6 transition-all duration-300">
-                <h2 class="text-2xl font-bold text-slate-700 mb-4 text-center flex items-center justify-center">
-                    <span class="w-2 h-6 bg-gradient-to-b from-emerald-400 to-teal-400 rounded-full mr-2"></span>
-                    Áreas de Dominio
-                </h2>
-                <p class="text-center text-slate-600 mb-6">Una vista realista de mis competencias técnicas actuales,
-                    mostrando un perfil en desarrollo con fortalezas específicas y áreas de crecimiento continuo.</p>
-                <div class="chart-container h-80 md:h-96">
-                    <canvas id="skillsRadarChart"></canvas>
-                </div>
-            </section>
-
-            <section class="lg:col-span-2 section-card rounded-xl p-6 transition-all duration-300">
-                <h2 class="text-2xl font-bold text-slate-700 mb-4 text-center flex items-center justify-center">
-                    <span class="w-2 h-6 bg-gradient-to-b from-blue-400 to-indigo-400 rounded-full mr-2"></span>
-                    Tecnologías Principales
-                </h2>
-                <p class="text-center text-slate-600 mb-6">Este gráfico refleja mi nivel actual de experiencia en
-                    diferentes tecnologías, con énfasis en mi fortaleza en Python y mi disposición continua para
-                    aprender.</p>
-                <div class="chart-container h-80 md:h-96">
-                    <canvas id="technologiesBarChart"></canvas>
-                </div>
-            </section>
-
-            <section class="lg:col-span-3">
-                <h2 class="text-3xl font-bold text-center text-slate-700 mb-8 flex items-center justify-center">
-                    <span class="w-3 h-8 bg-gradient-to-b from-purple-400 to-pink-400 rounded-full mr-3"></span>
-                    Experiencia en Proyectos Destacados
-                </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="section-card rounded-xl p-6 transition-all duration-300 hover:scale-105">
-                        <div class="flex items-center mb-3">
-                            <div class="w-3 h-3 bg-gradient-to-r from-green-400 to-emerald-400 rounded-full mr-3"></div>
-                            <h3 class="text-xl font-bold text-slate-700">SERMENTAL | App Web para Salud Mental Juvenil
-                            </h3>
-                        </div>
-                        <p class="text-sm font-semibold text-teal-600 mb-3">Rol: Desarrollador Backend</p>
-                        <p class="text-slate-600 mb-4">Lideré el desarrollo del backend para una plataforma que recibió
-                            <span class="font-bold text-emerald-600">reconocimiento a nivel municipal</span> por su
-                            innovación en salud. Mis responsabilidades incluyeron el diseño de la base de datos, el
-                            desarrollo de la API principal y la implementación de funcionalidades clave de usuario.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="skill-badge text-xs font-semibold px-3 py-1 rounded-full">PHP</span>
-                            <span class="skill-badge text-xs font-semibold px-3 py-1 rounded-full">MySQL</span>
-                            <span class="skill-badge text-xs font-semibold px-3 py-1 rounded-full">API REST</span>
+                <!-- Projects Section -->
+                <section class="profile-section">
+                    <h2 class="section-title">Proyectos Destacados</h2>
+                    
+                    <div class="project-card">
+                        <h3 style="color: #5d5347; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">
+                            SERMENTAL - Plataforma de Salud Mental Juvenil
+                        </h3>
+                        <p style="color: #8b7355; font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem;">
+                            Desarrollador Backend • Reconocimiento Municipal
+                        </p>
+                        <p style="color: #6b6356; margin-bottom: 1rem;">
+                            Desarrollé la arquitectura backend completa para una aplicación web enfocada en salud 
+                            mental juvenil. Implementé sistema de usuarios, base de datos optimizada y API RESTful 
+                            para la gestión de contenido y sesiones terapéuticas.
+                        </p>
+                        <div>
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">API REST</span>
+                            <span class="tech-tag">Arquitectura MVC</span>
                         </div>
                     </div>
-                    <div class="section-card rounded-xl p-6 transition-all duration-300 hover:scale-105">
-                        <div class="flex items-center mb-3">
-                            <div class="w-3 h-3 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mr-3"></div>
-                            <h3 class="text-xl font-bold text-slate-700">EHSE | Plataforma de Apoyo a la Salud Emocional
-                            </h3>
-                        </div>
-                        <p class="text-sm font-semibold text-teal-600 mb-3">Rol: Desarrollador Backend</p>
-                        <p class="text-slate-600 mb-4">Fui responsable del desarrollo del backend para una plataforma
-                            que obtuvo <span class="font-bold text-emerald-600">reconocimiento a nivel
-                                departamental</span>. Construí módulos de autenticación, implementé un sistema de
-                            almacenamiento seguro e integré servicios de terceros para análisis de datos.</p>
-                        <div class="flex flex-wrap gap-2">
-                            <span class="skill-badge text-xs font-semibold px-3 py-1 rounded-full">PHP</span>
-                            <span class="skill-badge text-xs font-semibold px-3 py-1 rounded-full">MySQL</span>
-                            <span class="skill-badge text-xs font-semibold px-3 py-1 rounded-full">Seguridad</span>
+                    
+                    <div class="project-card">
+                        <h3 style="color: #5d5347; font-size: 1.2rem; font-weight: 700; margin-bottom: 0.5rem;">
+                            EHSE - Apoyo a la Salud Emocional
+                        </h3>
+                        <p style="color: #8b7355; font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem;">
+                            Desarrollador Backend • Reconocimiento Departamental
+                        </p>
+                        <p style="color: #6b6356; margin-bottom: 1rem;">
+                            Construí los módulos de backend para una plataforma de apoyo emocional, incluyendo 
+                            sistema de autenticación seguro, almacenamiento de datos sensibles y integración 
+                            con servicios externos para análisis de patrones de comportamiento.
+                        </p>
+                        <div>
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">Seguridad</span>
+                            <span class="tech-tag">Integración APIs</span>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <section class="lg:col-span-3 section-card rounded-xl p-8 transition-all duration-300">
-                <h2 class="text-2xl font-bold text-slate-700 mb-2 text-center flex items-center justify-center">
-                    <span class="w-2 h-6 bg-gradient-to-b from-orange-400 to-red-400 rounded-full mr-2"></span>
-                    Metodología de Trabajo: Git Flow
-                </h2>
-                <p class="text-center text-slate-600 mb-8">Aplico el flujo de trabajo de Git Flow para mantener un
-                    control de versiones organizado, limpio y colaborativo, garantizando la estabilidad del código en
-                    todas las fases del desarrollo.</p>
-                <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-6">
-                    <div
-                        class="flow-step bg-gradient-to-r from-emerald-100 to-teal-100 text-slate-700 border-2 border-emerald-200">
-                        Master/Main<br>(Producción)</div>
-                    <div class="flow-arrow hidden md:block">→</div>
-                    <div class="flow-arrow block md:hidden">↓</div>
-                    <div
-                        class="flow-step bg-gradient-to-r from-blue-100 to-indigo-100 text-slate-700 border-2 border-blue-200">
-                        Develop<br>(Integración)</div>
-                    <div class="flow-arrow hidden md:block">→</div>
-                    <div class="flow-arrow block md:hidden">↓</div>
-                    <div
-                        class="flow-step bg-gradient-to-r from-purple-100 to-pink-100 text-slate-700 border-2 border-purple-200">
-                        Feature Branches<br>(Nuevas Funcionalidades)</div>
-                </div>
-            </section>
-
-            <section class="lg:col-span-2 section-card rounded-xl p-6 transition-all duration-300">
-                <h2 class="text-2xl font-bold text-slate-700 mb-6 flex items-center">
-                    <span class="w-2 h-8 bg-gradient-to-b from-cyan-400 to-blue-400 rounded-full mr-3"></span>
-                    Competencias Adicionales
-                </h2>
-                <div class="space-y-4">
-                    <div class="competencia-item">
-                        <div class="flex items-start">
-                            <span class="text-emerald-500 font-bold text-xl mr-3 mt-1">✓</span>
-                            <div>
-                                <h3 class="font-bold text-slate-700 mb-1">Resolución de Problemas</h3>
-                                <p class="text-slate-600">Fuerte capacidad analítica para diagnosticar, depurar y
-                                    solucionar desafíos técnicos complejos.</p>
-                            </div>
-                        </div>
+                <!-- Git Workflow Section -->
+                <section class="workflow-container">
+                    <h2 style="color: #4a453e; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">
+                        Metodología de Control de Versiones
+                    </h2>
+                    <p style="color: #6b6356; margin-bottom: 0;">
+                        Implemento Git Flow para mantener un desarrollo organizado y colaborativo
+                    </p>
+                    <div class="workflow-steps">
+                        <div class="workflow-step">Main<br><small>Producción</small></div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">Develop<br><small>Integración</small></div>
+                        <div class="workflow-arrow">→</div>
+                        <div class="workflow-step">Features<br><small>Desarrollo</small></div>
                     </div>
-                    <div class="competencia-item">
-                        <div class="flex items-start">
-                            <span class="text-emerald-500 font-bold text-xl mr-3 mt-1">✓</span>
-                            <div>
-                                <h3 class="font-bold text-slate-700 mb-1">Trabajo en Equipo</h3>
-                                <p class="text-slate-600">Experiencia colaborando en equipos de desarrollo bajo
-                                    metodologías ágiles.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="competencia-item">
-                        <div class="flex items-start">
-                            <span class="text-emerald-500 font-bold text-xl mr-3 mt-1">✓</span>
-                            <div>
-                                <h3 class="font-bold text-slate-700 mb-1">Adaptabilidad y Autoaprendizaje</h3>
-                                <p class="text-slate-600">Gran facilidad para aprender nuevas tecnologías de forma
-                                    autónoma.</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="competencia-item">
-                        <div class="flex items-start">
-                            <span class="text-emerald-500 font-bold text-xl mr-3 mt-1">✓</span>
-                            <div>
-                                <h3 class="font-bold text-slate-700 mb-1">Comunicación Técnica</h3>
-                                <p class="text-slate-600">Habilidad para articular y documentar conceptos técnicos de
-                                    manera clara.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="lg:col-span-1 section-card rounded-xl p-6 text-center transition-all duration-300">
-                <h2 class="text-2xl font-bold text-slate-700 mb-6 flex items-center justify-center">
-                    <span class="w-2 h-6 bg-gradient-to-b from-indigo-400 to-purple-400 rounded-full mr-2"></span>
-                    Educación
-                </h2>
-                <div class="mb-6 p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-100">
-                    <p class="text-lg font-semibold text-slate-700">Técnico en Análisis y Desarrollo de Software</p>
-                    <p class="text-slate-500">SENA - En curso, finaliza en 2025</p>
-                    <div class="w-full bg-blue-200 rounded-full h-2 mt-2">
-                        <div class="bg-gradient-to-r from-blue-400 to-indigo-500 h-2 rounded-full" style="width: 85%">
-                        </div>
-                    </div>
-                    <p class="text-xs text-slate-500 mt-1">Progreso: 85%</p>
-                </div>
-                <div class="p-4 bg-gradient-to-r from-green-50 to-emerald-50 rounded-lg border border-green-100">
-                    <p class="text-lg font-semibold text-slate-700">Bachiller Académico</p>
-                    <p class="text-slate-500">I.E Marco Fidel Suárez - Finalizado</p>
-                    <span class="inline-block mt-2 bg-emerald-500 text-white text-xs px-3 py-1 rounded-full">✓
-                        Completado</span>
-                </div>
-            </section>
-
-        </main>
-
-        <footer class="text-center mt-12 py-8 border-t border-slate-300 bg-white rounded-xl shadow-sm">
-            <div class="flex items-center justify-center mb-4">
-                <div class="w-16 h-1 bg-gradient-to-r from-teal-400 to-blue-400 rounded-full"></div>
+                </section>
+                
             </div>
-            <p class="text-slate-600">&copy; 2025 Diego Alejandro Rodriguez Espinoza. Portfolio profesional diseñado
-                para destacar competencias y potencial.</p>
+
+            <!-- Right Column -->
+            <div>
+                
+                <!-- Skills Radar -->
+                <section class="profile-section">
+                    <h2 class="section-title">Competencias Técnicas</h2>
+                    <p style="color: #6b6356; font-size: 0.9rem; margin-bottom: 1rem;">
+                        Evaluación realista de mis habilidades actuales como desarrollador junior
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="skillsRadarChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- Technologies Bar Chart -->
+                <section class="profile-section">
+                    <h2 class="section-title">Tecnologías</h2>
+                    <p style="color: #6b6356; font-size: 0.9rem; margin-bottom: 1rem;">
+                        Nivel de experiencia en diferentes herramientas y lenguajes
+                    </p>
+                    <div class="chart-container">
+                        <canvas id="technologiesBarChart"></canvas>
+                    </div>
+                </section>
+
+                <!-- Soft Skills -->
+                <section class="profile-section">
+                    <h2 class="section-title">Competencias Personales</h2>
+                    
+                    <div class="skill-item">
+                        <h3 style="color: #5d5347; font-weight: 600; margin-bottom: 0.5rem;">Aprendizaje Rápido</h3>
+                        <p style="color: #6b6356; font-size: 0.9rem;">
+                            Capacidad excepcional para asimilar nuevas tecnologías y conceptos de forma autónoma.
+                        </p>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <h3 style="color: #5d5347; font-weight: 600; margin-bottom: 0.5rem;">Resolución de Problemas</h3>
+                        <p style="color: #6b6356; font-size: 0.9rem;">
+                            Enfoque analítico para diagnosticar y solucionar desafíos técnicos complejos.
+                        </p>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <h3 style="color: #5d5347; font-weight: 600; margin-bottom: 0.5rem;">Colaboración</h3>
+                        <p style="color: #6b6356; font-size: 0.9rem;">
+                            Experiencia trabajando en equipo y disposición natural para ayudar a otros.
+                        </p>
+                    </div>
+                    
+                    <div class="skill-item">
+                        <h3 style="color: #5d5347; font-weight: 600; margin-bottom: 0.5rem;">Comunicación</h3>
+                        <p style="color: #6b6356; font-size: 0.9rem;">
+                            Habilidad para explicar conceptos técnicos de manera clara y comprensible.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Education -->
+                <section class="profile-section">
+                    <h2 class="section-title">Formación Académica</h2>
+                    
+                    <div class="education-item">
+                        <h3 style="color: #5d5347; font-weight: 600; margin-bottom: 0.5rem;">
+                            Técnico en Análisis y Desarrollo de Software
+                        </h3>
+                        <p style="color: #8b7355; margin-bottom: 0.5rem;">SENA • 2023 - 2025</p>
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <p style="color: #6b6356; font-size: 0.8rem;">Progreso: 75% • En búsqueda de práctica</p>
+                    </div>
+                    
+                    <div class="education-item">
+                        <h3 style="color: #5d5347; font-weight: 600; margin-bottom: 0.5rem;">
+                            Bachiller Académico
+                        </h3>
+                        <p style="color: #8b7355; margin-bottom: 0.5rem;">I.E Marco Fidel Suárez</p>
+                        <span style="background: #8b7355; color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.8rem;">
+                            Completado
+                        </span>
+                    </div>
+                </section>
+                
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer style="text-align: center; margin-top: 3rem; padding: 2rem; color: #8b7355; border-top: 1px solid #e8e6e1;">
+            <p>Diego Alejandro Rodriguez Espinoza • 2025 • Desarrollador Backend en Formación</p>
         </footer>
 
     </div>
 
     <script>
-        const tooltipTitleCallback = function (tooltipItems) {
-            const item = tooltipItems[0];
-            let label = item.chart.data.labels[item.dataIndex];
-            if (Array.isArray(label)) {
-                return label.join(' ');
-            } else {
-                return label;
-            }
+        // Colores pasteles y naturales
+        const naturalColors = {
+            primary: '#8b7355',      // Marrón suave
+            secondary: '#a68b5b',    // Beige oscuro  
+            tertiary: '#6b8e5a',     // Verde oliva
+            quaternary: '#7a8ca8',   // Azul grisáceo
+            quinary: '#b8860b',      // Dorado opaco
+            senary: '#8fbc8f',       // Verde mar
+            septenary: '#cd853f'     // Ocre
         };
 
-        const wrapLabel = (label) => {
-            const maxLength = 16;
-            if (label.length <= maxLength) return label;
-            const words = label.split(' ');
-            const lines = [];
-            let currentLine = '';
-            words.forEach(word => {
-                if ((currentLine + word).length > maxLength) {
-                    lines.push(currentLine.trim());
-                    currentLine = '';
-                }
-                currentLine += word + ' ';
-            });
-            lines.push(currentLine.trim());
-            return lines;
-        };
-
-        // Colores suaves y profesionales que reflejan amabilidad y confianza
-        const softColors = {
-            primary: '#2c3e50',      // Azul gris oscuro
-            secondary: '#3498db',     // Azul amigable
-            accent: '#27ae60',        // Verde confiable
-            teal: '#16a085',         // Verde azulado
-            orange: '#e67e22',       // Naranja cálido
-            purple: '#8e44ad',       // Púrpura suave
-            slate600: 'rgb(71 85 105)'
-        };
-
+        // Radar Chart
         const radarCtx = document.getElementById('skillsRadarChart').getContext('2d');
         new Chart(radarCtx, {
             type: 'radar',
             data: {
-                labels: ['Desarrollo Backend', 'Bases de Datos', 'Git y Github', 'DevOps & Contenedores', 'Frontend', 'Adaptabilidad'],
+                labels: ['Backend', 'Bases de Datos', 'Control Versiones', 'DevOps', 'Frontend', 'Aprendizaje'],
                 datasets: [{
-                    label: 'Nivel de Competencia',
                     data: [75, 65, 70, 45, 55, 100],
-                    backgroundColor: 'rgba(52, 152, 219, 0.15)',
-                    borderColor: softColors.secondary,
-                    pointBackgroundColor: softColors.secondary,
-                    pointBorderColor: '#fff',
-                    pointHoverBackgroundColor: '#fff',
-                    pointHoverBorderColor: softColors.secondary,
+                    backgroundColor: 'rgba(139, 115, 85, 0.15)',
+                    borderColor: naturalColors.primary,
+                    pointBackgroundColor: naturalColors.primary,
+                    pointBorderColor: '#ffffff',
                     pointBorderWidth: 2,
-                    pointHoverBorderWidth: 3,
-                    pointRadius: 6,
-                    pointHoverRadius: 8
+                    pointRadius: 5,
+                    borderWidth: 2
                 }]
             },
             options: {
                 maintainAspectRatio: false,
                 responsive: true,
-                scales: {
-                    r: {
-                        angleLines: { color: 'rgba(52, 152, 219, 0.2)' },
-                        grid: { color: 'rgba(52, 152, 219, 0.1)' },
-                        pointLabels: {
-                            font: { size: 12, weight: '600' },
-                            color: softColors.primary
-                        },
-                        ticks: {
-                            backdropColor: 'rgba(255, 255, 255, 0.8)',
-                            color: softColors.slate600,
-                            stepSize: 25,
-                            font: { size: 10 }
-                        },
-                        suggestedMin: 0,
-                        suggestedMax: 100
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    },
+                plugins: { 
+                    legend: { display: false },
                     tooltip: {
                         callbacks: {
-                            title: tooltipTitleCallback,
-                            label: function (context) {
-                                return `${context.dataset.label}: ${context.parsed.r}%`;
+                            label: function(context) {
+                                return `${context.parsed.r}%`;
                             }
+                        }
+                    }
+                },
+                scales: {
+                    r: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            stepSize: 25,
+                            color: '#8b7355',
+                            backdropColor: 'rgba(255, 255, 255, 0.8)'
+                        },
+                        grid: { color: 'rgba(139, 115, 85, 0.2)' },
+                        angleLines: { color: 'rgba(139, 115, 85, 0.2)' },
+                        pointLabels: {
+                            color: '#5d5347',
+                            font: { size: 11, weight: '600' }
                         }
                     }
                 }
             }
         });
 
+        // Bar Chart
         const barCtx = document.getElementById('technologiesBarChart').getContext('2d');
-        const originalLabels = ['Python (Django, FastAPI, Flask)', 'PHP (Laravel)', 'MySQL & PostgreSQL', 'Git & Git Flow', 'Docker', 'HTML5 & CSS3', 'JavaScript (DOM)'];
-        const wrappedLabels = originalLabels.map(wrapLabel);
-
         new Chart(barCtx, {
             type: 'bar',
             data: {
-                labels: wrappedLabels,
+                labels: ['Python', 'PHP', 'MySQL', 'Git', 'Docker', 'HTML/CSS', 'JavaScript'],
                 datasets: [{
-                    label: 'Nivel de Experiencia',
-                    data: [70, 50, 65, 75, 45, 70, 50],
+                    data: [80, 50, 65, 75, 45, 70, 60],
                     backgroundColor: [
-                        softColors.secondary,
-                        softColors.accent,
-                        softColors.teal,
-                        softColors.primary,
-                        softColors.orange,
-                        softColors.purple,
-                        '#34495e'
+                        naturalColors.primary,
+                        naturalColors.secondary,
+                        naturalColors.tertiary,
+                        naturalColors.quaternary,
+                        naturalColors.quinary,
+                        naturalColors.senary,
+                        naturalColors.septenary
                     ],
                     borderColor: '#ffffff',
-                    borderWidth: 2,
-                    borderRadius: 8,
-                    borderSkipped: false
+                    borderWidth: 1,
+                    borderRadius: 4
                 }]
             },
             options: {
                 indexAxis: 'y',
                 maintainAspectRatio: false,
                 responsive: true,
+                plugins: { 
+                    legend: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.parsed.x}%`;
+                            }
+                        }
+                    }
+                },
                 scales: {
                     x: {
                         beginAtZero: true,
+                        max: 100,
                         grid: { display: false },
                         ticks: {
-                            color: softColors.slate600,
-                            callback: function (value) {
+                            color: '#8b7355',
+                            callback: function(value) {
                                 return value + '%';
                             }
                         }
                     },
                     y: {
-                        grid: { display: true, color: 'rgba(0, 0, 0, 0.05)' },
-                        ticks: { color: softColors.primary, font: { weight: '600', size: 11 } }
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        callbacks: {
-                            title: tooltipTitleCallback,
-                            label: function (context) {
-                                return `${context.dataset.label}: ${context.parsed.x}%`;
-                            }
+                        grid: { display: false },
+                        ticks: {
+                            color: '#5d5347',
+                            font: { weight: '600', size: 10 }
                         }
                     }
                 }
@@ -460,5 +507,4 @@
         });
     </script>
 </body>
-
 </html>
